@@ -42,3 +42,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+/devops-terraform/01_JenkinsServer/.terraform/
+/devops-terraform/01_JenkinsServer/.terraform.lock.hcl
+/devops-terraform/01_JenkinsServer/terraform.tfstate
+/devops-terraform/01_JenkinsServer/terraform.tfstate.backup
