@@ -34,3 +34,43 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+
+
+
+aws configure
+
+
+java --version
+docker --version
+jenkins --version
+trivy --version
+
+
+Docker'da tüm containerları listeledik.
+
+docker ps -a
+
+docker stop CONTAINER_ID
+docker start CONTAINER_ID
+
+docker ps -a
+
+SonarQube için Jenkins makinesinin PUBLIC_IP'sini alıp 9000 portuna gideceğiz
+http://PUBLIC_IP:9000
+
+
+React için Jenkins makinesinin PUBLIC_IP'sini alıp 3000 portuna gideceğiz.
+http://PUBLIC_IP:3000
+
+
+Jenkins için Jenkins makinesinin PUBLIC_IP'sini alıp 8080 portuna gideceğiz.
+http://PUBLIC_IP:8080
+
+
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+
+
+
+
+

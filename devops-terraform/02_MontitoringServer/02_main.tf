@@ -16,8 +16,6 @@ resource "aws_instance" "web" {
 }
 
 
-
-
 resource "aws_security_group" "My-Monitoring-Server-SG" {
   name        = "My-Monitoring-Server-SG" #
   description = "Allow TLS inbound traffic"
