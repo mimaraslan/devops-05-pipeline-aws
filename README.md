@@ -29,7 +29,6 @@ http://localhost:3000
 
 ##  1. Makine: Jenkins Master Node
 
-
 ```bash
 aws configure
 ```
