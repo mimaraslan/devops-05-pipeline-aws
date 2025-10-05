@@ -212,8 +212,9 @@ JenkinsMakinesininPublicIP'yi al.
 
 
 TAKİP EDİLME KAYDI.
-
+```
 cd /etc/prometheus
+```
 
 ```
 sudo nano prometheus.yml
@@ -235,10 +236,11 @@ curl -X POST http://localhost:9090/-/reload
 
 
 
+
 Ekleyeceğimiz dashboardlarda veri kaynağını belirteceğiz.
-
+```
 https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/
-
+```
 Bu URLdeki 9964 bu id değeridir.
 
 
