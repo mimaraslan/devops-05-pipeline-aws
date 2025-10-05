@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-       /*
+
         stage("Sonarqube Analysis") {
             steps {
                 withSonarQubeEnv('SonarTokenForJenkins') {
@@ -46,19 +46,6 @@ pipeline {
                         $SCANNER_HOME/bin/sonar-scanner \
                         -Dsonar.projectName=devops-05-pipeline-aws \
                         -Dsonar.projectKey=devops-05-pipeline-aws
-                    '''
-                }
-            }
-        }
-       */
-
-        stage('Run SonarQube Analysis') {
-            steps {
-                withSonarQubeEnv('SonarTokenForJenkins') {
-                    sh '''
-                        ${SCANNER_HOME}/bin/sonar-scanner \
-                        -Dsonar.projectKey=devops-05-pipeline-aws \
-                        -Dsonar.sources=src
                     '''
                 }
             }
@@ -74,12 +61,18 @@ pipeline {
         }
 
 
-/*
-        stage('TRIVY FS SCAN') {
+        stage('Trivy FS Scan') {
              steps {
-                 sh "trivy fs . > trivyfs.txt"
+                 script {
+                    if (isUnix()) {
+                            sh "trivy fs . > trivyfs.txt"
+                        } else  {
+                            bat "trivy fs . > trivyfs.txt"
+                     }
+                 }
              }
          }
+
 
 
         stage("Docker Build & Push"){
@@ -95,6 +88,7 @@ pipeline {
         }
 
 
+/*
         stage("TRIVY Image Scan"){
             steps{
                 sh "trivy image mimaraslan/devops-05-pipeline-aws:latest > trivyimage.txt"

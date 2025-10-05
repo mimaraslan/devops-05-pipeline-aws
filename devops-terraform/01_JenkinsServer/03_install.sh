@@ -28,8 +28,13 @@ sudo usermod -aG docker jenkins
 newgrp docker
 sudo chmod 777 /var/run/docker.sock
 
+
 #sonarqube
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+
+# ODEV bilgisayar acildigida Docker'in uzerinde calisan sonarqube containerlarıni otomatik çalıştırmak
+# docker ps -a
+# docker start SONAR_CONTAINER_ID
 
 #trivy
 sudo apt-get install wget apt-transport-https gnupg lsb-release -y
@@ -40,11 +45,12 @@ sudo apt-get install trivy -y
 
 
 
+# EKS burada kurulu değil.
 
-#EKS
+
 sudo apt update
-sudo apt upgrade -y	
-sudo reboot
+sudo apt upgrade -y
+
 
 #curl
 sudo apt install curl
@@ -67,3 +73,5 @@ curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/d
 cd /tmp
 sudo mv /tmp/eksctl /bin
 
+
+sudo reboot
