@@ -121,18 +121,19 @@ dockerhub
 
 
 
-## ==== 2. Makineyi MontitoringServer Terrafom üzerinden kuracağız.
+## 2. Makineyi MontitoringServer Terrafom üzerinden kuracağız.
 
 D:\workspace\devops-2025\devops-05-pipeline-aws\devops-terraform\02_MontitoringServer
 içindeki 03_install.sh  prometheus ve node_exporter sürümlerini güncelle
+
 https://github.com/prometheus/prometheus/releases/
+
 https://github.com/prometheus/node_exporter/releases
 
 
-
-
+```
 cd  D:\workspace\devops-2025\devops-05-pipeline-aws\devops-terraform\02_MontitoringServer
-
+```
 
 Bunu sadece 1 kere yapmamız yeterli. Burada gerek yok.
 ```
@@ -169,6 +170,7 @@ Ctrl+C ile terminalden çık.
 
 
 Prometheus'u URLden çalıştır.
+
 http://MonitoringMakinesinin_PUBLIC_IP:9090
 
 
@@ -206,9 +208,7 @@ http://MonitoringMakinesinin_PUBLIC_IP:9090
 Jenkins'se Prometheus plugin'ini kurduk.
 System tarafına geçip tüm metric verilerini takip etmesini istedik.
 
-JenkinsPublicIP'yi al.
-3.233.45.51
-
+JenkinsMakinesininPublicIP'yi al.
 
 
 TAKİP EDİLME KAYDI.
@@ -223,7 +223,7 @@ sudo nano prometheus.yml
 - job_name: "jenkins"
   metrics_path: "/prometheus"
   static_configs:
-    - targets: ["3.233.45.51:8080"]
+    - targets: ["JenkinsMakinesininPublicIP:8080"]
 ```
 
 
@@ -236,21 +236,26 @@ curl -X POST http://localhost:9090/-/reload
 
 
 Ekleyeceğimiz dashboardlarda veri kaynağını belirteceğiz.
+
 https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/
+
 Bu URLdeki 9964 bu id değeridir.
 
 
 
 
-### EKS kurulumu
+### Gmail App passwords
 
+Jenkins üzerinden EMAIL attırmak için Gmail'in "App passwords" hizmetinden yaralanacağoz.
 
-Jenkins üzerinden EMAIL attırma  App passwords gmail
 YOUR_MAIL_ID@gmail.com
+
 GMAIL_TOKEN
+
 aaaa bbbb cccc dddd
 
 
+### Docker dangling
 Kullanılmayan imageleri silmek gerekiyor. Makinede dangling birikmesine sebep oluyor.
 https://docs.docker.com/reference/cli/docker/image/prune/
 ```
@@ -258,12 +263,15 @@ docker image prune -f
 ```
 
 
+### EKS kurulumu
 
 ```
 sudo apt update
 sudo apt upgrade -y
 ```
 
+
+### AWS CLI v2
 ```
 curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
 sudo apt install unzip
@@ -272,7 +280,7 @@ sudo ./aws/install
 aws --version
 ```
 
-
+### kubectl
 ```
 sudo apt install curl
 curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
@@ -280,6 +288,7 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
 ```
 
+### eksctl
 ```
 curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
 cd /tmp
@@ -289,10 +298,7 @@ eksctl version
 
 
 
-Bu komut bütün her şey kurulduktan sonra en son çalıştırılır.
-```
-sudo reboot
-```
+
 
 
 #### EC2 JENKINS_SERVER makineye ADMIN ROLUNU VER.
@@ -326,8 +332,6 @@ kubectl get nodes -o wide
 
 kubectl get pods -o wide
 ```
-
-
 
 
 
@@ -378,9 +382,14 @@ kubectl get svc -n prometheus
 ```
 
 
-GitHub'a bir commit yapıldığında Jenkins'in bundan haberdar olmasını ve otomaik çalışmasını istiyoruz.
+Bu komut bütün her şey kurulduktan sonra en son çalıştırılır.
+```
+sudo reboot
+```
 
-Webhooks / Add webhook
+### Webhooks / Add webhook
+
+#### GitHub'a bir commit yapıldığında Jenkins'in bundan haberdar olmasını ve otomaik çalışmasını istiyoruz.
 
 https://github.com/mimaraslan/devops-05-pipeline-aws/settings/hooks
 
@@ -388,20 +397,17 @@ https://github.com/mimaraslan/devops-05-pipeline-aws/settings/hooks
 
 
 
-
-
-
-EKS'DE ÇALIŞAN SADECE DEPLOYMENT'I YOK ETMEK.
+#### EKS'DE ÇALIŞAN SADECE DEPLOYMENT'I YOK ETMEK.
 ```
 kubectl delete deployment.apps/my-workspace-cluster
 ```
 
-EKS'DE ÇALIŞAN SADECE SERVISI YOK ETMEK.
+#### EKS'DE ÇALIŞAN SADECE SERVISI YOK ETMEK.
 ```
 kubectl delete service/my-workspace-service
 ```
 
-EKS'DE ÇALIŞAN SADECE prometheus PODUNU YOK ETMEK.
+#### EKS'DE ÇALIŞAN SADECE prometheus PODUNU YOK ETMEK.
 ```
 kubectl delete --all pods -n prometheus                  
 kubectl delete namespace prometheus
@@ -409,14 +415,13 @@ kubectl delete namespace prometheus
 
 
 
-Elimizle kurduğumuz EKS'deki nodeları ve onların kullandığı tüm AWS kaynaklarını hepten silme komutları
+### Elimizle kurduğumuz EKS'deki nodeları ve onların kullandığı tüm AWS kaynaklarını hepten silme komutları
 ```
 export AWS_DEFAULT_REGION=us-west-1
 eksctl delete cluster   --name my-workspace-cluster
 ```
 
-
-Sadece Terraform'un yönettiği kaynakları siler.
+### Sadece Terraform'un yönettiği kaynakları silme komutu.
 ```
 terraform destroy
 ```
