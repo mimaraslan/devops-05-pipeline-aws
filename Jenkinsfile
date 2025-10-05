@@ -109,7 +109,7 @@ pipeline {
                 }
             }
         }
-
+ */
 
 
         stage('Docker Image to Clean') {
@@ -118,12 +118,12 @@ pipeline {
                 sh 'docker image prune -f'
             }
         }
-        */
+
 
     }
 
 
-/*
+
     post {
      always {
         emailext attachLog: true,
@@ -135,6 +135,6 @@ pipeline {
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
-*/
+
 
 }

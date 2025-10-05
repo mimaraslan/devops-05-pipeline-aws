@@ -173,6 +173,7 @@ Prometheus'u URLden çalıştır.
 http://MonitoringMakinesinin_PUBLIC_IP:9090
 
 
+TAKİP EDİLME KAYDI.
 
 cd /etc/prometheus
 
@@ -201,3 +202,111 @@ Açılış ekranında veri kaynağı (datasources) ekleyeceğiz.
 
 Prometheus'un URL'ini vereceğiz.
 http://MonitoringMakinesinin_PUBLIC_IP:9090
+
+
+Jenkins'se Prometheus plugin'ini kurduk.
+System tarafına geçip tüm metric verilerini takip etmesini istedik.
+
+JenkinsPublicIP'yi al.
+3.233.45.51
+
+
+
+TAKİP EDİLME KAYDI.
+
+cd /etc/prometheus
+
+```
+sudo nano prometheus.yml
+```
+
+```
+- job_name: "jenkins"
+  metrics_path: "/prometheus"
+  static_configs:
+    - targets: ["3.233.45.51:8080"]
+```
+
+
+```
+promtool check config /etc/prometheus/prometheus.yml
+
+curl -X POST http://localhost:9090/-/reload
+```
+
+
+
+Ekleyeceğimiz dashboardlarda veri kaynağını belirteceğiz.
+https://grafana.com/grafana/dashboards/9964-jenkins-performance-and-health-overview/
+Bu URLdeki 9964 bu id değeridir.
+
+
+
+
+### EKS kurulumu
+
+
+Jenkins üzerinden EMAIL attırma  App passwords gmail
+YOUR_MAIL_ID@gmail.com
+GMAIL_TOKEN
+aaaa bbbb cccc dddd
+
+
+Kullanılmayan imageleri silmek gerekiyor. Makinede dangling birikmesine sebep oluyor.
+https://docs.docker.com/reference/cli/docker/image/prune/
+
+docker image prune -f
+
+
+
+
+```
+sudo apt update
+sudo apt upgrade -y
+```
+
+```
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+sudo apt install unzip
+unzip awscliv2.zip
+sudo ./aws/install
+aws --version
+```
+
+
+```
+sudo apt install curl
+curl -LO https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl
+sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
+kubectl version --client
+```
+
+```
+curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+cd /tmp
+sudo mv /tmp/eksctl /bin
+eksctl version
+```
+
+
+
+Bu komut bütün her şey kurulduktan sonra en son çalıştırılır.
+```
+sudo reboot
+```
+
+
+#### EC2 JENKINS_SERVER makineye ADMIN ROLUNU VER.
+AWS'deki CPU sınırlandırmasına takılmamak için us-west-1 bölgesinde Nodelarımızı oluşturacağız.
+
+```
+eksctl create cluster --name my-workspace-cluster \
+--region us-west-1 \
+--node-type t3.large \
+--nodes 2 
+```
+
+
+
+
+
