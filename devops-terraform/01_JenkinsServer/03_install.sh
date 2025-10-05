@@ -32,7 +32,7 @@ sudo chmod 777 /var/run/docker.sock
 #sonarqube
 docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
-# ODEV bilgisayar acildigida Docker'in uzerinde calisan sonarqube containerlarıni otomatik çalıştırmak
+# Bilgisayar acildigida Docker'in uzerinde calisan sonarqube containerlarıni otomatik çalıştırma yapilacak.
 # docker ps -a
 # docker start SONAR_CONTAINER_ID
 
@@ -78,6 +78,18 @@ sudo apt upgrade -y
 #--node-type t3.large \
 #--nodes 2
 
+### Helm kurulumu
+#curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+#chmod 700 get_helm.sh
+#./get_helm.sh
+#helm repo add stable https://charts.helm.sh/stable
+#helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+#kubectl create namespace prometheus
+#helm install stable prometheus-community/kube-prometheus-stack -n prometheus
+#kubectl get pods -n prometheus
+
+### ArgoCD kurulumu
+#
 
 # makineyi yeniden baslatma en sonda olacak.
  sudo reboot
