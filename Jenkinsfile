@@ -88,14 +88,14 @@ pipeline {
         }
 
 
-/*
-        stage("TRIVY Image Scan"){
+
+        stage("Trivy Image Scan"){
             steps{
                 sh "trivy image mimaraslan/devops-05-pipeline-aws:latest > trivyimage.txt"
             }
         }
 
-
+/*
         stage('Deploy to Kubernetes'){
             steps{
                 script{
