@@ -46,7 +46,7 @@ resource "aws_security_group" "My-Jenkins-Server-SG" {
 
 }
 
-#
+
 
 
 # EKSyi otomatikten kurmak için Create role EC2

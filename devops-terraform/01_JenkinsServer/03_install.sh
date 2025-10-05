@@ -73,11 +73,10 @@ sudo apt update
 sudo apt upgrade -y
 
 #  EKSyi de Terraform üzerinden kurmayı hedefliyoruz.
-
-# Create role ec2 için
-
-
-
+#eksctl create cluster --name my-workspace-cluster \
+#--region us-west-1 \
+#--node-type t3.large \
+#--nodes 2
 
 
 # makineyi yeniden baslatma en sonda olacak.
