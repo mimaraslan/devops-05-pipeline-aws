@@ -41,7 +41,6 @@ sudo systemctl enable prometheus
 sudo systemctl start prometheus
 
 
-
 ##Install Node Exporter and Create Service for Node Exporter
 sudo useradd --system --no-create-home --shell /bin/false node_exporter
 wget https://github.com/prometheus/node_exporter/releases/download/v1.9.1/node_exporter-1.9.1.linux-amd64.tar.gz
