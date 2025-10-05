@@ -15,7 +15,7 @@ Monitoring:      (Prometheus, Grafana, ELK)
 ```
 <hr>
 
-![DevOps.png](public/DevOps.png)
+![AWS_DevOps.jpg](public/AWS_DevOps.jpg)
 
 #### ReactJS - [Next.js](https://nextjs.org) project [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
