@@ -187,3 +187,17 @@ sudo nano prometheus.yml
 ```
 
 
+```
+promtool check config /etc/prometheus/prometheus.yml
+
+curl -X POST http://localhost:9090/-/reload
+```
+
+
+Grafana'ya git.
+http://MonitoringMakinesinin_PUBLIC_IP:3000
+
+Açılış ekranında veri kaynağı (datasources) ekleyeceğiz.
+
+Prometheus'un URL'ini vereceğiz.
+http://MonitoringMakinesinin_PUBLIC_IP:9090
