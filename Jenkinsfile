@@ -38,7 +38,7 @@ pipeline {
             }
         }
 
-
+/*
         stage("Sonarqube Analysis") {
             steps {
                 withSonarQubeEnv('SonarTokenForJenkins') {
@@ -95,21 +95,21 @@ pipeline {
             }
         }
 
-/*
+
         stage('Deploy to Kubernetes'){
             steps{
                 script{
                     dir('kubernetes') {
                       withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubernetes', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
-                      sh 'kubectl delete --all pods'
-                      sh 'kubectl apply -f deployment.yml'
-                      sh 'kubectl apply -f service.yml'
+                          sh 'kubectl delete --all pods'
+                          sh 'kubectl apply -f deployment.yml'
+                          sh 'kubectl apply -f service.yml'
                       }
                     }
                 }
             }
         }
- */
+
 
 
         stage('Docker Image to Clean') {
@@ -118,12 +118,12 @@ pipeline {
                 sh 'docker image prune -f'
             }
         }
-
+*/
 
     }
 
 
-
+/*
     post {
      always {
         emailext attachLog: true,
@@ -131,10 +131,10 @@ pipeline {
             body: "Project: ${env.JOB_NAME}<br/>" +
                 "Build Number: ${env.BUILD_NUMBER}<br/>" +
                 "URL: ${env.BUILD_URL}<br/>",
-            to: 'mimaraslan@gmail.com',
+            to: 'YOUR_MAIL@gmail.com',
             attachmentsPattern: 'trivyfs.txt,trivyimage.txt'
         }
     }
-
+*/
 
 }
