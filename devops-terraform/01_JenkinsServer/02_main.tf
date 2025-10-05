@@ -15,9 +15,6 @@ resource "aws_instance" "web" {
 
 }
 
-
-
-
 resource "aws_security_group" "My-Jenkins-Server-SG" {
   name        = "My-Jenkins-Server-SG" #
   description = "Allow TLS inbound traffic"
@@ -49,5 +46,11 @@ resource "aws_security_group" "My-Jenkins-Server-SG" {
 
 }
 
+#
 
+
+# EKSyi otomatikten kurmak için Create role EC2
+# Add permissions kısmından Permissions policies bu yetkiyi AdministratorAccess vereceğiz.
+# Role name : EKS_EC2_ROLE
+# Modify IAM role  - Attach an IAM role to your instance.
 
