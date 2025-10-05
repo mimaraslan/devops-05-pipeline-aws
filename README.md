@@ -136,14 +136,15 @@ cd  D:\workspace\devops-2025\devops-05-pipeline-aws\devops-terraform\02_Montitor
 
 
 Bunu sadece 1 kere yapmamız yeterli. Burada gerek yok.
+```
 aws configure
+```
 
-
-
+```
 terraform init
 terraform plan
 terraform apply -auto-approve
-
+```
 
 Elastic IP aldık.
 
@@ -152,13 +153,19 @@ Elastic IP aldık.
 
 Terminale bu komutları yazdık.
 
+```
 sudo systemctl status prometheus
+```
 Ctrl+C ile terminalden çık.
 
+```
 sudo systemctl status node_exporter
+```
 Ctrl+C ile terminalden çık.
 
+```
 sudo systemctl status grafana-server
+```
 Ctrl+C ile terminalden çık.
 
 
@@ -169,11 +176,14 @@ http://MonitoringMakinesinin_PUBLIC_IP:9090
 
 cd /etc/prometheus
 
+```
 sudo nano prometheus.yml
+```
 
+```
 - job_name: "node_exporter"
   static_configs:
     - targets: ["MonitoringMakinesinin_PUBLIC_IP:9090"]
-
+```
 
 
