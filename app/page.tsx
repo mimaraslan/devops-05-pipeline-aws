@@ -16,7 +16,7 @@ export default function Home() {
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
 
-        DevOps
+        DevOps Frontend
         </div>
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
