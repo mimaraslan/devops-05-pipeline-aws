@@ -309,4 +309,119 @@ eksctl create cluster --name my-workspace-cluster \
 
 
 
+```
+kubectl config view
+
+
+kubectl get service
+
+kubectl get svc
+
+kubectl get svc --all-namespaces
+
+kubectl get service -o wide
+
+
+
+kubectl get nodes -o wide
+
+kubectl get pods -o wide
+```
+
+
+
+
+
+
+
+### Helm kurulumu
+```
+sudo snap install helm --classic    
+helm version
+```
+
+OR
+
+```
+curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
+chmod 700 get_helm.sh
+./get_helm.sh
+helm version
+```
+
+```
+helm repo add stable https://charts.helm.sh/stable
+
+helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+kubectl create namespace prometheus
+
+helm install stable prometheus-community/kube-prometheus-stack -n prometheus
+
+kubectl get pods -n prometheus
+```
+
+
+CALISTIĞI MAKINENIN PORT numarasını verdik.
+```
+kubectl edit svc stable-kube-prometheus-sta-prometheus -n prometheus
+```
+Şu ikisini değiştirdik.
+
+targetPort: 9090
+
+type: LoadBalancer
+
+
+
+```
+kubectl get svc -n prometheus
+```
+
+
+GitHub'a bir commit yapıldığında Jenkins'in bundan haberdar olmasını ve otomaik çalışmasını istiyoruz.
+
+Webhooks / Add webhook
+
+https://github.com/mimaraslan/devops-05-pipeline-aws/settings/hooks
+
+
+
+
+
+
+
+
+EKS'DE ÇALIŞAN SADECE DEPLOYMENT'I YOK ETMEK.
+```
+kubectl delete deployment.apps/my-workspace-cluster
+```
+
+EKS'DE ÇALIŞAN SADECE SERVISI YOK ETMEK.
+```
+kubectl delete service/my-workspace-service
+```
+
+EKS'DE ÇALIŞAN SADECE prometheus PODUNU YOK ETMEK.
+```
+kubectl delete --all pods -n prometheus                  
+kubectl delete namespace prometheus
+```
+
+
+
+Elimizle kurduğumuz EKS'deki nodeları ve onların kullandığı tüm AWS kaynaklarını hepten silme komutları
+```
+export AWS_DEFAULT_REGION=us-west-1
+eksctl delete cluster   --name my-workspace-cluster
+```
+
+
+Sadece Terraform'un yönettiği kaynakları siler.
+```
+terraform destroy
+```
+
+
+
 
