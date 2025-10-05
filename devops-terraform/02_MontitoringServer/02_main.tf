@@ -48,15 +48,12 @@ resource "aws_security_group" "My-Monitoring-Server-SG" {
 }
 
 
-
-
-
 resource "aws_budgets_budget" "budget-ec2" {
   name              = "my-monthly-budget"
   budget_type       = "COST"
   limit_amount      = "80"
   limit_unit        = "USD"
-  time_period_start = "2024-10-01_00:00"
+  time_period_start = "2025-10-01_00:00"
   time_unit         = "MONTHLY"
 
   notification {
