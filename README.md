@@ -15,7 +15,7 @@ Monitoring:      (Prometheus, Grafana, ELK)
 ```
 <hr>
 
-![AWS DevOps.jpg](public/AWS%20DevOps.jpg)
+![DevOps.png](public/DevOps.png)
 
 #### ReactJS - [Next.js](https://nextjs.org) project [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
@@ -106,12 +106,11 @@ sonarqube-webhook
 http://3.233.45.51:8080/sonarqube-webhook
 
 
-
 DockerHub'a gidip Docker Token oluştur.
 MyDockerHubTokenForAWS
-
-docker login -u mimaraslan -p  dckr_BBBBBBBBBBB
-
+```
+docker login -u YOUR_USERNAME -p  dckr_BBBBBBBBBBB
+```
 
 
 
@@ -254,9 +253,9 @@ aaaa bbbb cccc dddd
 
 Kullanılmayan imageleri silmek gerekiyor. Makinede dangling birikmesine sebep oluyor.
 https://docs.docker.com/reference/cli/docker/image/prune/
-
+```
 docker image prune -f
-
+```
 
 
 
